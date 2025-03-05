@@ -1,0 +1,2 @@
+C:/Users/11/Documents/GitHub/Final_Project_ITI/android/app/.cxx/Debug/1s3g22y5/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/11/Documents/GitHub/Final_Project_ITI/android/app/.cxx/Debug/1s3g22y5/arm64-v8a/CMakeFiles/rebuild_cache.dir

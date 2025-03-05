@@ -11,8 +11,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-
   @override
   void initState() {
     super.initState();
@@ -20,7 +18,8 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => const LoginPage(),
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const LoginPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
               opacity: animation,
@@ -31,7 +30,6 @@ class _SplashScreenState extends State<SplashScreen> {
       );
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,39 +48,37 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         ),
         child: Shimmer.fromColors(
-            baseColor: Colors.white,
-            highlightColor: Colors.grey[300]!,
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Welcome to",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: AppColors.appWhite,
-                      fontFamily: 'Poppins'
-                  ),
+          baseColor: Colors.white,
+          highlightColor: Colors.grey[300]!,
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Welcome to",
+                style: TextStyle(
+                    fontSize: 20,
+                    color: AppColors.appWhite,
+                    fontFamily: 'Poppins'),
+              ),
+              Text(
+                "Shopping Store",
+                style: TextStyle(
+                    fontSize: 33,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.appWhite,
+                    fontFamily: 'Poppins'),
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Don\'t worry about\nThe Shopping we\'re all here',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.white70,
                 ),
-                Text(
-                  "Shafey Store",
-                  style: TextStyle(
-                      fontSize: 33,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.appWhite,
-                      fontFamily: 'Poppins'
-                  ),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  'Don\'t worry about\nThe Shopping we\'re all here',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white70,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
+          ),
         ),
       ),
     );

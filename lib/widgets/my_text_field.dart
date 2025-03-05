@@ -1,9 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:iti_final_project/consts/app_colors.dart';
 import 'package:iti_final_project/widgets/my_gradient_text.dart';
 
+// ignore: must_be_immutable
 class MyTextField extends StatelessWidget {
   final TextEditingController? controller;
   String? Function(String?)? validator;
@@ -14,7 +13,6 @@ class MyTextField extends StatelessWidget {
   final String text;
   final bool? isObscure;
   final IconButton? suffixIcon;
-
 
   MyTextField({
     super.key,
@@ -37,32 +35,36 @@ class MyTextField extends StatelessWidget {
         MyGradientText(
           fontSize: 14,
           text: text,
-          colors: colors?? const [
-            AppColors.appBlue,
-            AppColors.appBlue,
-            AppColors.appLightBlue,
-          ],
+          colors: colors ??
+              const [
+                AppColors.appBlue,
+                AppColors.appBlue,
+                AppColors.appLightBlue,
+              ],
         ),
-        const SizedBox(height: 8,),
+        const SizedBox(
+          height: 8,
+        ),
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(borderRadius?? 8),
+            borderRadius: BorderRadius.circular(borderRadius ?? 8),
             border: Border.all(
               width: 2,
               color: Colors.transparent,
             ),
             gradient: LinearGradient(
-              colors: colors?? const [
-                AppColors.appBlue,
-                AppColors.appBlue,
-                AppColors.appLightBlue,
-              ],
-              begin: begin?? Alignment.topCenter,
-              end: end?? Alignment.bottomCenter,
+              colors: colors ??
+                  const [
+                    AppColors.appBlue,
+                    AppColors.appBlue,
+                    AppColors.appLightBlue,
+                  ],
+              begin: begin ?? Alignment.topCenter,
+              end: end ?? Alignment.bottomCenter,
             ),
           ),
           child: TextFormField(
-            obscureText: isObscure??false,
+            obscureText: isObscure ?? false,
             controller: controller,
             decoration: InputDecoration(
               suffixIcon: suffixIcon ?? null,
@@ -70,17 +72,16 @@ class MyTextField extends StatelessWidget {
               filled: true,
               fillColor: Colors.white,
               border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius?? 8),
-                  borderSide: BorderSide.none
-              ),
+                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                  borderSide: BorderSide.none),
             ),
-            validator: validator ?? (val){ return;},
+            validator: validator ??
+                (val) {
+                  return;
+                },
           ),
         ),
       ],
     );
   }
 }
-
-
-

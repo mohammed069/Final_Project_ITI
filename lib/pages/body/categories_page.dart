@@ -15,14 +15,13 @@ class CategoriesPage extends StatefulWidget {
   State<CategoriesPage> createState() => _CategoriesPageState();
 }
 
-class _CategoriesPageState extends State<CategoriesPage> with AutomaticKeepAliveClientMixin{
-
+class _CategoriesPageState extends State<CategoriesPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
-  List categories=[];
-  bool loading= false;
-
+  List categories = [];
+  bool loading = false;
 
   @override
   void initState() {
@@ -30,71 +29,73 @@ class _CategoriesPageState extends State<CategoriesPage> with AutomaticKeepAlive
     fetchCategories();
   }
 
-
   Future<void> fetchCategories() async {
     setState(() {
-      loading=true;
+      loading = true;
     });
-    final url=Uri.parse("https://ib.jamalmoallart.com/api/v2/categories");
+    final url = Uri.parse("https://ib.jamalmoallart.com/api/v2/categories");
     var response = await http.get(
       url,
       headers: {'Accept': 'application/json'},
     );
     var responseBody = jsonDecode(response.body);
 
-    if(response.statusCode==200 || response.statusCode==201){
-      if(responseBody["state"]==false){
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(responseBody["message"]))
-        );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      if (responseBody["state"] == false) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(responseBody["message"])));
       }
-    }else{
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("${responseBody["message"]} ${responseBody["data"]}"))
-      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("${responseBody["message"]} ${responseBody["data"]}")));
     }
 
     setState(() {
-      loading=false;
+      loading = false;
       categories = responseBody["data"];
     });
-
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.backgroundColor,
-        body:loading? Center(child: Shimmer.fromColors(
-          baseColor: AppColors.appBlue,
-          highlightColor: AppColors.appWhite,
-          child: const Text(
-            'Shafey Store',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 40.0,
-            ),
-          ),
-        ),):Padding(
-          padding: const EdgeInsets.all(15),
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                mainAxisExtent: AppScreenSize.getScreenHeight(context)*.27
-            ),
-            itemCount: 10,
-            itemBuilder: (context,index)=>CategoryCard(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> ProductsScreen(id: categories[index]["id"],)));
-              },
-              image: categories[index]["image"],
-              name: categories[index]["name"],
-            ),
-          ),
-        )
-    );
+        body: loading
+            ? Center(
+                child: Shimmer.fromColors(
+                  baseColor: AppColors.appBlue,
+                  highlightColor: AppColors.appWhite,
+                  child: const Text(
+                    'Shopping Store',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 40.0,
+                    ),
+                  ),
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsets.all(15),
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      mainAxisExtent:
+                          AppScreenSize.getScreenHeight(context) * .27),
+                  itemCount: 10,
+                  itemBuilder: (context, index) => CategoryCard(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProductsScreen(
+                                    id: categories[index]["id"],
+                                  )));
+                    },
+                    image: categories[index]["image"],
+                    name: categories[index]["name"],
+                  ),
+                ),
+              ));
   }
 }
